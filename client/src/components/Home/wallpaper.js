@@ -1,0 +1,25 @@
+import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Card, CardBody, Button, CardTitle, CardText, CardImg } from 'reactstrap';
+import SignInUpForm from './form';
+import './home.css';
+import wallpaper from '../../images/wallpaper.jpeg'
+
+class Home extends React.Component {
+  render(){
+    return (
+    <div className="container">
+      <Container  fluid={true}>
+      <Row>
+        <Col md="6" xs={false}></Col>
+        <Col md="6">
+          <SignInUpForm />
+        </Col>
+      </Row>
+    </Container>
+    </div>
+      );
+  }
+}
+
+export default Home;
