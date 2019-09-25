@@ -11,10 +11,11 @@ class Home extends React.Component {
     <div className="container">
       <Container  fluid={true}>
       <Row>
-        <Col md="6" xs={false}></Col>
+        <Col md="3" xs={false}></Col>
         <Col md="6">
           <SignInUpForm />
         </Col>
+        <Col md="3" xs={false}></Col>
       </Row>
     </Container>
     </div>
