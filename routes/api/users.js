@@ -18,7 +18,9 @@ router.get('/', (req, res) => {
 //  @access   Public
 router.post('/', (req, res) => {
     const newUser = new User({
-        name: req.body.name
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
     });
 
     newUser.save().then(user => res.json(user));

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Alert, Spinner } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import classnames from 'classnames';
 import resumelogo from '../../images/resumelogo.png';
@@ -18,7 +18,9 @@ export default class SignInUpForm extends React.Component {
       username: '',
       email: '',
       password: '',
-      confirmpassword: ''
+      confirmpassword: '', 
+      submitted: false,
+      loading: false
     };
   }
 
@@ -49,13 +51,23 @@ export default class SignInUpForm extends React.Component {
       alert('Password not matched');
     } else{
       axios.post('/api/users', user)
-           .then(function(response){
-             console.log(response)
-           })
-           .catch(function(error){
-             console.log(error)
-           })
-      console.log(this.state.username, this.state.email, this.state.password, this.state.confirmpassword)
+          .then(function(response){
+            
+            console.log(response);
+            console.log('Submitted')
+          })
+          .catch(function(error){
+            console.log(error)
+          })
+      
+      // console.log(user)
+      this.setState({
+        username: '',
+        email: '',
+        password: '',
+        confirmpassword: '', 
+        submitted: true
+      })
     }
     
   }
@@ -93,6 +105,13 @@ export default class SignInUpForm extends React.Component {
           <TabPane className="tabpane" tabId="1">
             <Row>
               <Col sm="12">
+                {this.state.submitted === true ? 
+                  <Alert color="primary" style={{marginTop: '10px'}}>
+                    User account created successfully!
+                  </Alert>
+                  : ''
+                }
+              
               <Form style={{paddingTop: '30px'}} onSubmit={e => this.handleSubmit(e)}>
                 <FormGroup>
                   <Label for="exampleEmail">Username</Label>
@@ -139,7 +158,7 @@ export default class SignInUpForm extends React.Component {
                     onChange={e => this.handleChange('confirmpassword', e.target.value)}/>
                 </FormGroup>
                 
-                <Button className="btn" color="primary">Sign Up</Button>
+                <Button className="btn" color="primary">Sign Up {this.state.loading === true ? <Spinner size="sm" color="light" /> : ''}</Button>
               </Form>
               </Col>
             </Row>
