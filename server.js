@@ -2,7 +2,7 @@ const express  = require('express');
 const mongoose = require('mongoose');
 const bodyParser= require('body-parser');
 
-const users = require('./routes/api/users');
+const users = require('./routes/api/register');
 
 const app = express();
 
@@ -18,7 +18,7 @@ mongoose.connect(db, {useNewUrlParser: true})
         .catch(err => console.log(err));
 
 //Use routes
-app.use('/api/users', users);
+app.use('/api/register', users);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
