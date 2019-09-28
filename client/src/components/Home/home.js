@@ -6,6 +6,10 @@ import './home.css';
 import wallpaper from '../../images/wallpaper.jpeg'
 
 class Home extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  
   render(){
     return (
     <div className="container">
@@ -13,7 +17,7 @@ class Home extends React.Component {
       <Row>
         <Col md="3" xs={false}></Col>
         <Col md="6">
-          <SignInUpForm />
+          <SignInUpForm {...this.props}/>
         </Col>
         <Col md="3" xs={false}></Col>
       </Row>

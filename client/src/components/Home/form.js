@@ -5,6 +5,7 @@ import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import classnames from 'classnames';
 import resumelogo from '../../images/resumelogo.png';
 import './home.css'
+import SignIn from './signin';
 
 export default class SignInUpForm extends React.Component {
   constructor(props) {
@@ -166,18 +167,7 @@ export default class SignInUpForm extends React.Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="12">
-              <Form style={{paddingTop: '30px'}}>
-                <FormGroup>
-                  <Label for="exampleEmail">Email</Label>
-                  <Input type="email" name="email" id="exampleEmail" placeholder="Your email" />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="examplePassword">Password</Label>
-                  <Input type="password" name="password" id="examplePassword" placeholder="Your password" />
-                </FormGroup>
-                
-                <Button className="btn" color="primary">Sign In</Button>
-              </Form>
+                <SignIn {...this.props}/>
               </Col>
             </Row>
           </TabPane>
