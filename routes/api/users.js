@@ -48,10 +48,10 @@ router.post('/login', (req, res) => {
             }
             
             if(password !== user.password){
-                return res.status(404).json({ success: false})
+                return res.status(404).json({ success: false })
             }
 
-            return res.status(200).json({ success: true})
+            return res.status(200).json({ success: true, user})
         })
 
     

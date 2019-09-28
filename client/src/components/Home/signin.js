@@ -39,9 +39,14 @@ class SignIn extends React.Component {
     axios.post('/api/users/login', user)
           .then(function(response){
             if(response.status == 200){
-               history.push('/dashboard');
+               history.push({
+                 pathname: '/dashboard',
+                 state: {
+                   username: response.data.user.username
+                 }
+                });
             }
-            console.log(response);
+            // console.log(response.data.user.username);
           })
           .catch(function(error){
             console.log(error)
