@@ -40,7 +40,7 @@ class SignIn extends React.Component {
           .then(function(response){
             if(response.status == 200){
                history.push({
-                 pathname: '/dashboard',
+                 pathname: '/main_dashboard',
                  state: {
                    username: response.data.user.username
                  }

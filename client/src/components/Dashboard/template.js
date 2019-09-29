@@ -1,22 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import NavBar from './navbar';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Container, Row, Col, CardImgOverlay } from 'reactstrap';
 import "./dashboard.css"
 
-export default class Dashboard extends React.Component {
+export default class Template extends React.Component {
   constructor(props) {
     super(props);
   } 
 
-  render() {
-    // const username = this.props.location.state.username;
-    // console.log(username);
+  render() {  
     return (
       <div>
-        {/* <NavBar username={username}/> */}
-        <div>
           <Container>
             <Row>
               <Col md="4">
@@ -43,22 +38,8 @@ export default class Dashboard extends React.Component {
                 </CardImgOverlay>
               </Card>
               </Col>
-              <Col md="4">
-              <Card className="cards">
-                <CardBody>
-                  <CardTitle className="cardTitle">
-                    <h3>Create your resume here</h3>
-                  </CardTitle>
-                  <Link to={this.props.tabId}>
-                    <Button className="btn">Create</Button>
-                  </Link>
-                </CardBody>
-              </Card>
-              </Col>
             </Row>
           </Container>
-        </div>
-            
       </div>
     );
   }

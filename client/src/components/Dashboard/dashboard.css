@@ -1,0 +1,32 @@
+.display-5{
+    color: #fff
+}
+
+.dashboard{
+    padding: 90px;
+    background: #4B4E6D;
+}
+
+@media (min-width:100px){
+    .dashboard{
+        padding: 30px;
+    }
+}
+
+.dashboard hr{
+    background: #fff;
+    height: 2px;
+}
+
+.cards{
+    text-align: center;
+    height: 100%;
+}
+
+.cards .cardTitle{
+    padding-top: 25px;
+}
+
+.cards .btn{
+    margin-top: 25px
+}
