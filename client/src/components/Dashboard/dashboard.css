@@ -7,6 +7,10 @@
     background: #4B4E6D;
 }
 
+.dashboard .nav{
+    margin-bottom: 20px;
+}
+
 @media (min-width:100px){
     .dashboard{
         padding: 30px;
@@ -18,9 +22,15 @@
     height: 2px;
 }
 
+.dashboard .icon{
+    font-size: 25px;
+    cursor: pointer;
+}
+
 .cards{
     text-align: center;
     height: 100%;
+    border: none;
 }
 
 .cards .cardTitle{

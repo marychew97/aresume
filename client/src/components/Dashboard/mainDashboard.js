@@ -1,5 +1,7 @@
 import React from 'react';
 import {Router, Route, Switch, withRouter, BrowserRouter, Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Alert, Spinner, Card,CardTitle, CardImg, CardText, CardBody, CardSubtitle, Container, CardImgOverlay } from 'reactstrap';
 import NavBar from './navbar';
 import classnames from 'classnames';
@@ -47,7 +49,7 @@ export default class MainDashboard extends React.Component {
               onClick={() => { this.toggle('2'); }}
               style={{cursor: 'pointer'}}
             >
-              SIGN IN
+              Create Resume
             </NavLink>
           </NavItem>
         </Nav>
@@ -61,23 +63,11 @@ export default class MainDashboard extends React.Component {
                   <Card inverse className="cards">
                     <CardImg width="100%" src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Card image cap" />
                     <CardImgOverlay>
-                      <CardTitle>Card Title</CardTitle>
-                      <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-                      <CardText>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                      </CardText>
-                    </CardImgOverlay>
-                  </Card>
-                  </Col>
-                  <Col md="4">
-                  <Card inverse className="cards">
-                    <CardImg width="100%" src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Card image cap" />
-                    <CardImgOverlay>
-                      <CardTitle>Card Title</CardTitle>
-                      <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-                      <CardText>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                      </CardText>
+                      <NavLink><FontAwesomeIcon icon={faEye} className="icon"/></NavLink>
+                      <br/>
+                      <NavLink><FontAwesomeIcon icon={faEdit} className="icon"/></NavLink>
+                      <br/>
+                      <NavLink><FontAwesomeIcon icon={faTrashAlt} className="icon"/></NavLink>
                     </CardImgOverlay>
                   </Card>
                   </Col>
