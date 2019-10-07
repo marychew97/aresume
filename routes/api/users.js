@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 //User Model
-const User = require('../../models/User');
+const Schema = require('../../models/User')
+const User = Schema.User;
+const Resume = Schema.Resume;
 
 //  @route    GET api/register
 //  @desc     GET All Users
@@ -55,6 +57,15 @@ router.post('/login', (req, res) => {
         })
 
     
+})
+
+router.post('/create_resume', (req, res) => {
+    const newResume = new Resume({
+        // resume: {
+            template: req.body.template
+        // }
+    })
+    newResume.save().then(resume => res.status(200).json(resume));
 })
 
 

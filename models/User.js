@@ -14,10 +14,33 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    resumes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'resume'
+    }],
     date: {
         type: Date, 
         default: Date.now
     }
 })
 
-module.exports = User = mongoose.model('user', UserSchema);
+const ResumeSchema = new Schema({
+    // username: {
+    //     type:String,
+    //     ref: 'user'
+    // },
+    type: Schema.Types.ObjectId,
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    template: {
+        type: String
+    }
+    
+})
+
+module.exports = {
+    User: mongoose.model('user', UserSchema),
+    Resume: mongoose.model('resume', ResumeSchema)
+}
