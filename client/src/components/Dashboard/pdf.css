@@ -1,0 +1,25 @@
+.document{
+    height: 792px;
+    width: 612px;
+    padding: 20px;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: hidden
+}
+
+@media (min-width:100px) and (max-width: 1200px){
+    .document{
+        display: none;
+    }
+}
+
+.imageDiv{
+    height: 150px;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border: 3px solid #e1ce7a;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
