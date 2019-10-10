@@ -32,7 +32,9 @@ export default class NavBar extends React.Component {
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand>
-            <img src={ResumeLogo} alt="aresume logo" style={{width:'100px', height: '50px'}}/>
+            <NavLink href="/">
+              <img src={ResumeLogo} alt="aresume logo" style={{width:'100px', height: '50px'}}/>
+            </NavLink>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

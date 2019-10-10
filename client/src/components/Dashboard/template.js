@@ -83,15 +83,29 @@ export default class Template extends React.Component {
         })
       }
     }
+    this.setState({
+      page: this.state.page += 1
+    })
+  }
+  
+  switchPage(){
+    const {page} = this.state;
+    return(
+      <div>
+        {page > 0 && <Button style={{display: 'inline', marginRight: '20px'}} onClick={e => this.setState({ page: this.state.page -= 1})}>Back</Button>}
+        {page < 4 && <Button style={{display: 'inline'}} onClick={e => this.nextPage(e)}>Next</Button>}
+      </div>
+    )
   }
 
-  firstPage(){
-    
+  mainPage(){
+    const {page} = this.state;
     return(
       <Container>
         <Row>
           <Col md="6">
-            <Form style={{color: '#fff'}}>
+          <Form style={{color: '#fff'}}>
+              <h3 style={{marginBottom: '50px'}}>Your Personal Information</h3>
               <FormGroup>
               <Label for="exampleFile">Your Profile Picture</Label>
               <Input 
@@ -182,22 +196,121 @@ export default class Template extends React.Component {
               />
             </FormGroup>
           </Form>
+          {this.switchPage()}
           </Col>
           <Col md="6">
-            <PDF 
-              profile={this.state.imageUrl}
-              backgroundImage={this.state.backgroundImage}
-              name={this.state.name}
-              job={this.state.job}
-              email={this.state.email}
-              phone={this.state.phone}
-              address={this.state.address}
-              summary={this.state.summary}
-              url={this.state.url}
-            />
+            {this.pdf()}
           </Col>
         </Row>
       </Container>
+    )
+  }
+
+  pdf(){
+    return(
+      <PDF 
+        profile={this.state.imageUrl}
+        backgroundImage={this.state.backgroundImage}
+        name={this.state.name}
+        job={this.state.job}
+        email={this.state.email}
+        phone={this.state.phone}
+        address={this.state.address}
+        summary={this.state.summary}
+        url={this.state.url}
+      />
+    )
+  }
+
+  secondFormPage(){
+    const {page} = this.state;
+    return(
+      <Container>
+        <Row>
+          <Col md="6">
+          <Form style={{color: '#fff'}}>
+            <h3 style={{marginBottom: '50px'}}>Your Education</h3>
+            <FormGroup>
+              <Label for="exampleAddress">Where do you study?</Label>
+              <Input 
+                type="text" 
+                name="institution" 
+                id="exampleAddress" 
+                placeholder="Your education institution"
+                onKeyUp={e => this.createResume(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleText">What is your study program?</Label>
+              <Input 
+                type="text" 
+                name="study_program" 
+                id="exampleText"
+                placeholder="Your study program" 
+                onKeyUp={e => this.createResume(e)}
+              />
+            </FormGroup>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="exampleEmail">Which city does it located?</Label>
+                  <Input 
+                    type="text" 
+                    name="study_city" 
+                    id="exampleEmail" 
+                    placeholder="City of education institution" 
+                    onKeyUp={e => this.createResume(e)}
+                    />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="examplePassword">Which country does it located?</Label>
+                  <Input 
+                    type="text" 
+                    name="study_country" 
+                    id="examplePassword" 
+                    placeholder="Country of education institution" 
+                    onKeyUp={e => this.createResume(e)}
+                    />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="examplePassword">What's your email?</Label>
+                  <Input 
+                    type="email" 
+                    name="email" 
+                    id="examplePassword" 
+                    placeholder="Your email" 
+                    onKeyUp={e => this.createResume(e)}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="exampleEmail">What's your phone number?</Label>
+                  <Input 
+                    type="text" 
+                    name="phone" 
+                    id="exampleEmail" 
+                    placeholder="Your phone number" 
+                    onKeyUp={e => this.createResume(e)}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+          </Form>
+          {this.switchPage()}
+          </Col>
+          <Col md="6">
+            {this.pdf()}
+          </Col>
+        </Row>
+      </Container>
+      
     )
   }
 
@@ -226,9 +339,8 @@ export default class Template extends React.Component {
             </Row>
           </Container> }
 
-          {page == 1 && this.firstPage()}
-
-          {page > 0 && <Button onClick={e => this.setState({ page: this.state.page -= 1})}>Back</Button>}
+          {page == 1 && this.mainPage()}
+          {page == 2 && this.secondFormPage()}
           {/* {page < 2 && <Button onClick={e => this.nextPage(e)}>Next</Button>} */}
       </div>
     );

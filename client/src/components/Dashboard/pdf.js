@@ -1,7 +1,7 @@
 import React from 'react';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faPhoneAlt, faHome, faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faPhoneAlt, faHome, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons'
 import ReactDOMServer from 'react-dom/server';
 import canvg from 'canvg';
 import { Card, CardImg, CardText, CardBody,
@@ -51,7 +51,7 @@ class PDF extends React.Component{
                 keywords=""
                 ref={(r) => this.resume = r}>
                     <div className="document" style={{
-                      background: `url(${this.props.backgroundImage})`, 
+                      background: this.props.backgroundImage === '' ? '#fff' : `url(${this.props.backgroundImage})`, 
                       backgroundPosition: 'center center', 
                       backgroundSize: '100%', 
                       backgroundRepeat: 'no-repeat'}}>
@@ -61,6 +61,7 @@ class PDF extends React.Component{
                               {profile && <div className="imageDiv" style={{backgroundImage: `url(${profile})`}}></div>}
                               {/* {profile && <img src={profile} alt="profile picture" style={{width: '150px', height: '150px'}}/>} */}
                               <h5 style={{color: '#fff', textAlign: 'center'}}>{name}</h5>
+                              <p style={{color: '#e1ce7a', textAlign: 'center'}}>{job}</p>
                               {phone && <Container>
                                 <Row>
                                   <Col md={3}>
@@ -103,11 +104,13 @@ class PDF extends React.Component{
                               </Container>}
                             </Col>
                             <Col md={8}>
-                              <div>
-                                
-                              </div>
-                              {job}
-                              {summary}
+                              {summary && <div style={{marginLeft: '10px'}}>
+                                <div style={{padding: '10px', paddingLeft: '20px', backgroundColor: '#424b54', fontWeight: 'bold', color: '#fff'}}>
+                                  <FontAwesomeIcon icon={faUser} style={{color: '#e1ce7a'}}/> &nbsp;Profile
+                                </div>
+                                <div style={{marginLeft: '20px', paddingTop: '10px'}}>{summary}</div>
+                              </div>}
+                              
                             </Col>
                           </Row>  
                         </Container>  
