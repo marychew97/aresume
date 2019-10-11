@@ -26,11 +26,22 @@ export default class Template extends React.Component {
       phone: '',
       address: '',
       summary: '',
-      url: ''
+      url: '',
+      institution: '',
+      study_program: '',
+      study_city: '',
+      study_country: '',
+      startDate: null,
+      endDate: null,
+      presentDate: false,
+      edu_achievement: ''
     }
 
     this.createResume = this.createResume.bind(this);
-    this.imageReader = this.imageReader.bind(this)
+    this.imageReader = this.imageReader.bind(this);
+    this.checkPresent = this.checkPresent.bind(this);
+    this.inputDate = this.inputDate.bind(this);
+    this.submitResume = this.submitResume.bind(this);
   } 
 
   selectTemplate(background, e){
@@ -48,8 +59,27 @@ export default class Template extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
 
-    // console.log(this.state.job, this.state.name)
+  checkPresent(e){
+    this.setState({
+      presentDate: !this.state.presentDate
+    })
+    console.log(this.state.presentDate)
+  }
+
+  inputDate(e){
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+
+    // if(this.state.presentDate === true){
+    //   this.setState({
+    //     endDate: "Present"
+    //   })
+    // }
+    
+    console.log(this.state)
   }
 
   imageReader(e){
@@ -87,19 +117,26 @@ export default class Template extends React.Component {
       page: this.state.page += 1
     })
   }
+
+  submitResume(e){
+    e.preventDefault();
+    console.log('submitted')
+  }
   
   switchPage(){
     const {page} = this.state;
     return(
       <div>
         {page > 0 && <Button style={{display: 'inline', marginRight: '20px'}} onClick={e => this.setState({ page: this.state.page -= 1})}>Back</Button>}
-        {page < 4 && <Button style={{display: 'inline'}} onClick={e => this.nextPage(e)}>Next</Button>}
+        {page < 2 ?  
+          <Button style={{display: 'inline'}} onClick={e => this.nextPage(e)}>Next</Button> :
+          <Button style={{display: 'inline'}} onClick={e => this.submitResume(e)}>Submit</Button>}
       </div>
     )
   }
 
   mainPage(){
-    const {page} = this.state;
+    const {profile, name, email, job, phone, address, summary, url} = this.state;
     return(
       <Container>
         <Row>
@@ -112,6 +149,7 @@ export default class Template extends React.Component {
                 type="file" 
                 name="profile" 
                 id="exampleFile" 
+                value={profile}
                 onChange={e => this.imageReader(e)}
                 />
             </FormGroup>
@@ -124,7 +162,8 @@ export default class Template extends React.Component {
                     name="name" 
                     id="exampleEmail" 
                     placeholder="Your name" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={name}
+                    onChange={e => this.createResume(e)}
                     />
                 </FormGroup>
               </Col>
@@ -136,7 +175,8 @@ export default class Template extends React.Component {
                     name="job" 
                     id="examplePassword" 
                     placeholder="Your job position" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={job}
+                    onChange={e => this.createResume(e)}
                     />
                 </FormGroup>
               </Col>
@@ -149,8 +189,9 @@ export default class Template extends React.Component {
                     type="email" 
                     name="email" 
                     id="examplePassword" 
-                    placeholder="Your email" 
-                    onKeyUp={e => this.createResume(e)}
+                    placeholder="Your email"
+                    value={email} 
+                    onChange={e => this.createResume(e)}
                   />
                 </FormGroup>
               </Col>
@@ -162,7 +203,8 @@ export default class Template extends React.Component {
                     name="phone" 
                     id="exampleEmail" 
                     placeholder="Your phone number" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={phone}
+                    onChange={e => this.createResume(e)}
                   />
                 </FormGroup>
               </Col>
@@ -174,7 +216,8 @@ export default class Template extends React.Component {
                 name="address" 
                 id="exampleAddress" 
                 placeholder="Your home address"
-                onKeyUp={e => this.createResume(e)}
+                value={address}
+                onChange={e => this.createResume(e)}
               />
             </FormGroup>
             <FormGroup>
@@ -183,7 +226,8 @@ export default class Template extends React.Component {
                 type="textarea" 
                 name="summary" 
                 id="exampleText" 
-                onKeyUp={e => this.createResume(e)}
+                value={summary}
+                onChange={e => this.createResume(e)}
               />
             </FormGroup>
             <FormGroup>
@@ -192,7 +236,8 @@ export default class Template extends React.Component {
                 type="url" 
                 name="url" 
                 id="exampleText" 
-                onKeyUp={e => this.createResume(e)}
+                value={url}
+                onChange={e => this.createResume(e)}
               />
             </FormGroup>
           </Form>
@@ -223,7 +268,7 @@ export default class Template extends React.Component {
   }
 
   secondFormPage(){
-    const {page} = this.state;
+    const {institution, study_program, study_city, study_country, startDate,edu_achievement, presentDate, endDate} = this.state;
     return(
       <Container>
         <Row>
@@ -237,7 +282,8 @@ export default class Template extends React.Component {
                 name="institution" 
                 id="exampleAddress" 
                 placeholder="Your education institution"
-                onKeyUp={e => this.createResume(e)}
+                value={institution}
+                onChange={e => this.createResume(e)}
               />
             </FormGroup>
             <FormGroup>
@@ -247,7 +293,8 @@ export default class Template extends React.Component {
                 name="study_program" 
                 id="exampleText"
                 placeholder="Your study program" 
-                onKeyUp={e => this.createResume(e)}
+                value={study_program}
+                onChange={e => this.createResume(e)}
               />
             </FormGroup>
             <Row form>
@@ -259,7 +306,8 @@ export default class Template extends React.Component {
                     name="study_city" 
                     id="exampleEmail" 
                     placeholder="City of education institution" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={study_city}
+                    onChange={e => this.createResume(e)}
                     />
                 </FormGroup>
               </Col>
@@ -271,37 +319,60 @@ export default class Template extends React.Component {
                     name="study_country" 
                     id="examplePassword" 
                     placeholder="Country of education institution" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={study_country}
+                    onChange={e => this.createResume(e)}
                     />
                 </FormGroup>
               </Col>
             </Row>
             <Row form>
-              <Col md={6}>
+              <Col md={5}>
                 <FormGroup>
-                  <Label for="examplePassword">What's your email?</Label>
+                  <Label for="examplePassword">Starting Date</Label>
                   <Input 
-                    type="email" 
-                    name="email" 
+                    type="date" 
+                    name="startDate" 
                     id="examplePassword" 
-                    placeholder="Your email" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={startDate}
+                    onChange={e => this.inputDate(e)}
                   />
                 </FormGroup>
               </Col>
-              <Col md={6}>
+              <Col md={5}>
                 <FormGroup>
-                  <Label for="exampleEmail">What's your phone number?</Label>
+                  <Label for="exampleEmail">Ending Date</Label>
                   <Input 
-                    type="text" 
-                    name="phone" 
+                    type={presentDate === true ? "text" : "date"} 
+                    name="endDate" 
                     id="exampleEmail" 
-                    placeholder="Your phone number" 
-                    onKeyUp={e => this.createResume(e)}
+                    value={presentDate === true ? "Present" : endDate}
+                    onChange={e => this.inputDate(e)}
                   />
+                </FormGroup>
+              </Col>
+              <Col md={2}>
+                <FormGroup style={{marginLeft: "20px"}}>
+                  <Input 
+                    type="checkbox" 
+                    name="presentDate" 
+                    id="exampleEmail" 
+                    value={presentDate}
+                    onChange={e => this.checkPresent(e)}
+                  />
+                  <Label for="exampleEmail">Present</Label>
                 </FormGroup>
               </Col>
             </Row>
+            <FormGroup>
+              <Label for="exampleText">Tell us about your achievement</Label>
+              <Input 
+                type="textarea" 
+                name="edu_achievement" 
+                id="exampleText" 
+                value={edu_achievement}
+                onChange={e => this.createResume(e)}
+              />
+            </FormGroup>
           </Form>
           {this.switchPage()}
           </Col>
