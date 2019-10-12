@@ -7,6 +7,7 @@ import { Card, CardImg, CardText, CardBody,
 import "./dashboard.css"
 import {templates} from '../../resume-templates/template';
 import PDF from './pdf';
+import axios from 'axios';
 
 export default class Template extends React.Component {
   constructor(props) {
@@ -120,7 +121,55 @@ export default class Template extends React.Component {
 
   submitResume(e){
     e.preventDefault();
-    console.log('submitted')
+    const {
+      profile,
+      template,
+      imageUrl,
+      name, 
+      email, 
+      job, 
+      phone, 
+      address, 
+      summary, 
+      url,
+      institution, 
+      study_program, 
+      study_city, 
+      study_country, 
+      startDate,
+      edu_achievement, 
+      presentDate, 
+      endDate
+    } = this.state;
+
+    const resume = {
+      template: template,
+      imageUrl: imageUrl,
+      name: name, 
+      email: email, 
+      job: job, 
+      phone: phone, 
+      address: address, 
+      summary: summary, 
+      url: url,
+      institution: institution, 
+      study_program: study_program, 
+      study_city: study_city, 
+      study_country: study_country, 
+      startDate: startDate,
+      edu_achievement: edu_achievement, 
+      presentDate: presentDate, 
+      endDate: endDate
+    }
+
+    axios.post('/api/users/create_resume', resume)
+         .then(function(response){
+           console.log(response);
+           console.log('submitted')
+         })
+         .catch(error => {
+           console.log(error)
+         })
   }
   
   switchPage(){
@@ -148,8 +197,7 @@ export default class Template extends React.Component {
               <Input 
                 type="file" 
                 name="profile" 
-                id="exampleFile" 
-                value={profile}
+                id="exampleFile"
                 onChange={e => this.imageReader(e)}
                 />
             </FormGroup>
