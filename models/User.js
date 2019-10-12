@@ -36,8 +36,58 @@ const ResumeSchema = new Schema({
     },
     template: {
         type: String
+    },
+    // profile: {
+    //     type: Buffer
+    // },
+    imageUrl: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    job: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    summary: {
+        type: String
+    },
+    url: {
+        type: String
+    },
+    institution: {
+        type: String
+    },
+    study_program: {
+        type: String
+    },
+    study_city: {
+        type: String
+    },
+    study_country: {
+        type: String
+    },
+    startDate: {
+        type: Date
+    },
+    endDate: {
+        type: Date
+    },
+    presentDate: {
+        type: Boolean
+    },
+    edu_achievement: {
+        type: String
     }
-    
 })
 
 module.exports = {

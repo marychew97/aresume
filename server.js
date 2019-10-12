@@ -7,7 +7,7 @@ const users = require('./routes/api/users');
 const app = express();
 
 //Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 
 //database config
 const db = require('./config/keys').mongoURI;

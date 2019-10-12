@@ -60,9 +60,46 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/create_resume', (req, res) => {
+    const {
+        template, 
+        profile, 
+        imageUrl, 
+        name, 
+        job, 
+        email,
+        phone, 
+        address,
+        summary,
+        url,
+        institution,
+        study_program,
+        study_city,
+        study_country,
+        startDate,
+        endDate,
+        presentDate,
+        edu_achievement
+    } = req.body;
     const newResume = new Resume({
         // resume: {
-            template: req.body.template
+            template: template,
+            // profile: profile,
+            imageUrl: imageUrl,
+            name: name,
+            job: job,
+            email: email,
+            phone: phone,
+            address: address,
+            summary: summary,
+            url: url,
+            institution: institution,
+            study_program: study_program,
+            study_city: study_city,
+            study_country: study_country,
+            startDate: startDate,
+            endDate: endDate,
+            presentDate: presentDate,
+            edu_achievement: edu_achievement
         // }
     })
     newResume.save().then(resume => res.status(200).json(resume));
