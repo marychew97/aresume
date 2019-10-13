@@ -62,7 +62,9 @@ router.post('/login', (req, res) => {
 router.post('/create_resume', (req, res) => {
     const {
         template, 
+        templateImg,
         profile, 
+        resumeName,
         imageUrl, 
         name, 
         job, 
@@ -82,7 +84,9 @@ router.post('/create_resume', (req, res) => {
     } = req.body;
     const newResume = new Resume({
         // resume: {
+            resumeName: resumeName,
             template: template,
+            templateImg: templateImg,
             // profile: profile,
             imageUrl: imageUrl,
             name: name,
@@ -105,5 +109,14 @@ router.post('/create_resume', (req, res) => {
     newResume.save().then(resume => res.status(200).json(resume));
 })
 
+
+//  @route    GET api/get_resume
+//  @desc     GET All Resume
+//  @access   Public
+router.get('/get_resume', (req, res) => {
+    Resume.find()
+        .sort({ date: -1 })
+        .then(resume => res.json(resume))
+})
 
 module.exports = router;
