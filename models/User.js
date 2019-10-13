@@ -34,9 +34,16 @@ const ResumeSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    resumeName: {
+        type: String,
+        required: true
+    },
     template: {
         type: String
     },
+    templateImg:{
+        type: String
+    }, 
     // profile: {
     //     type: Buffer
     // },
