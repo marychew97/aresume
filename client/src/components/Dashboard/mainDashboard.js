@@ -1,8 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import {Router, Route, Switch, withRouter, BrowserRouter, Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Alert, Spinner, Card,CardTitle, CardImg, CardText, CardBody, CardSubtitle, Container, CardImgOverlay } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Table, Spinner, Card,CardTitle, CardImg, CardText, CardBody, CardSubtitle, Container, CardImgOverlay } from 'reactstrap';
 import NavBar from './navbar';
 import classnames from 'classnames';
 import Dashboard from './dashboard'
@@ -15,20 +16,34 @@ export default class MainDashboard extends React.Component {
     
         this.toggle = this.toggle.bind(this);
         this.state = {
-          activeTab: '1'
+          activeTab: '1',
+          resumes: [],
+          isLoading: true
         };
       }
-    
-      toggle(tab) {
-        if (this.state.activeTab !== tab) {
-          this.setState({
-            activeTab: tab
-          });
-        }
+      
+    componentDidMount(){
+      axios.get('/api/users/get_resume')
+            .then(res => {
+              this.setState({
+                resumes: res.data,
+                isLoading: false
+              })
+            })
+          console.log(this.state)
+    }
+
+    toggle(tab) {
+      if (this.state.activeTab !== tab) {
+        this.setState({
+          activeTab: tab
+        });
       }
+    }
 
   render() {
     const username = this.props.location.state.username;  
+    const {resumes, isLoading} = this.state;
     return (
       <div>
         <NavBar username={username}/>
@@ -57,34 +72,35 @@ export default class MainDashboard extends React.Component {
           <TabPane className="tabpane" tabId="1">
             <Row>
               <Col sm="12">
-              <Container>
-                <Row>
-                  <Col md="4">
-                  <Card inverse className="cards">
-                    <CardImg width="100%" src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Card image cap" />
-                    <CardImgOverlay>
-                      <NavLink><FontAwesomeIcon icon={faEye} className="icon"/></NavLink>
-                      <br/>
-                      <NavLink><FontAwesomeIcon icon={faEdit} className="icon"/></NavLink>
-                      <br/>
-                      <NavLink><FontAwesomeIcon icon={faTrashAlt} className="icon"/></NavLink>
-                    </CardImgOverlay>
-                  </Card>
-                  </Col>
-                  <Col md="4">
-                  <Card className="cards">
-                    <CardBody>
-                      <CardTitle className="cardTitle">
-                        <h3>Create your resume here</h3>
-                      </CardTitle>
-                      <NavLink onClick={() => { this.toggle('2'); }}>
-                        <Button className="btn">Create</Button>
-                      </NavLink>
-                    </CardBody>
-                  </Card>
-                  </Col>
-                </Row>
-              </Container>
+                {isLoading === true ? <div style={{textAlign: 'center'}}><p style={{display: 'inline-block'}}>Loading resumes...</p>&nbsp;<Spinner color="primary" style={{display: 'inline-block'}}/></div> :
+                resumes.length === 0 ? <p style={{textAlign: 'center'}}>No resumes found</p> : 
+                <Table className="table">
+                  <thead>
+                    <tr>
+                      {/* <th>No. </th> */}
+                      <th>Resume</th>
+                      <th>Link</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {resumes.map((resume, id) => {
+                    return <tr>
+                      <td>{resume.resumeName}</td>
+                      <td><NavLink style={{padding: 0}} style={{cursor: 'pointer'}}>https://localhost:3000/test</NavLink></td>
+                      <td><NavLink style={{padding: 0}}><FontAwesomeIcon icon={faEye} className="icon"/></NavLink></td>
+                      <td><NavLink style={{padding: 0}}><FontAwesomeIcon icon={faEdit} className="icon"/></NavLink></td>
+                      <td><NavLink style={{padding: 0}}><FontAwesomeIcon icon={faTrashAlt} className="icon"/></NavLink></td>
+                    </tr>
+                  })}
+                  </tbody>
+                </Table>
+                }
+                <NavLink onClick={() => { this.toggle('2'); }}>
+                  <Button className="btn">Create</Button>
+                </NavLink>
               </Col>
             </Row>
           </TabPane>

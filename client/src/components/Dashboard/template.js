@@ -18,7 +18,9 @@ export default class Template extends React.Component {
     this.state = {
       page: 0,
       template: '',
+      resumeName: '',
       backgroundImage: '',
+      templateImg: '',
       profile: '',
       imageUrl: '',
       name: '',
@@ -45,12 +47,13 @@ export default class Template extends React.Component {
     this.submitResume = this.submitResume.bind(this);
   } 
 
-  selectTemplate(background, e){
+  selectTemplate(template, e){
     console.log(e.target.value)
     this.setState({
       template: this.state.template = e.target.value,
       page: this.state.page += 1,
-      backgroundImage: this.state.backgroundImage = background 
+      backgroundImage: this.state.backgroundImage = template.backgroundImage,
+      templateImg: this.state.templateImg= template.img
     })
 
     console.log(this.state)
@@ -124,6 +127,8 @@ export default class Template extends React.Component {
     const {
       profile,
       template,
+      templateImg,
+      resumeName,
       imageUrl,
       name, 
       email, 
@@ -144,6 +149,8 @@ export default class Template extends React.Component {
 
     const resume = {
       template: template,
+      templateImg: templateImg,
+      resumeName: resumeName,
       imageUrl: imageUrl,
       name: name, 
       email: email, 
@@ -185,14 +192,26 @@ export default class Template extends React.Component {
   }
 
   mainPage(){
-    const {profile, name, email, job, phone, address, summary, url} = this.state;
+    const {profile, name, email, job, phone, address, summary, url, resumeName} = this.state;
     return(
       <Container>
         <Row>
           <Col md="6">
-          <Form style={{color: '#fff'}}>
-              <h3 style={{marginBottom: '50px'}}>Your Personal Information</h3>
-              <FormGroup>
+          <Form>
+            <h3 style={{marginBottom: '50px'}}>Your Personal Information</h3>
+            <FormGroup>
+              <Label for="exampleEmail">Name your resume</Label>
+              <Input 
+                type="text" 
+                name="resumeName" 
+                id="exampleEmail" 
+                placeholder="Your resume name" 
+                value={resumeName}
+                onChange={e => this.createResume(e)}
+              />
+            </FormGroup>
+            <br/>
+            <FormGroup>
               <Label for="exampleFile">Your Profile Picture</Label>
               <Input 
                 type="file" 
@@ -321,7 +340,7 @@ export default class Template extends React.Component {
       <Container>
         <Row>
           <Col md="6">
-          <Form style={{color: '#fff'}}>
+          <Form>
             <h3 style={{marginBottom: '50px'}}>Your Education</h3>
             <FormGroup>
               <Label for="exampleAddress">Where do you study?</Label>
@@ -448,7 +467,7 @@ export default class Template extends React.Component {
                   <CardImgOverlay>
                     <div className="textOverlay">
                       <CardTitle>{template.name}</CardTitle>
-                      <Button color="primary" onClick={e => this.selectTemplate(template.backgroundImage, e)} value={template.name}>SELECT</Button>
+                      <Button color="primary" onClick={e => this.selectTemplate(template, e)} value={template.name}>SELECT</Button>
                     </div>
                   </CardImgOverlay>
                 </Card>
