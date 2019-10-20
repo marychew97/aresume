@@ -101,6 +101,9 @@ export default class MainDashboard extends React.Component {
                 <NavLink onClick={() => { this.toggle('2'); }}>
                   <Button className="btn">Create</Button>
                 </NavLink>
+                <Link to="/scanner">
+                  <Button className="btn">Scan</Button>
+                </Link>
               </Col>
             </Row>
           </TabPane>

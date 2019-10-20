@@ -1,10 +1,10 @@
-body{
+/* body{
     background:linear-gradient(0deg,rgba(73, 68, 71, 0.3),rgba(0, 119, 255, 0.3)), url('../../images/wallpaper.jpeg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat; 
     background-attachment: fixed;
-}
+} */
 
 .form{
     margin-top: 10px;

@@ -4,7 +4,8 @@ import {Router, Route, Switch, withRouter, BrowserRouter} from 'react-router-dom
 import Home from '../src/components/Home/home';
 import Dashboard from '../src/components/Dashboard/dashboard';
 import Template from '../src/components/Dashboard/template';
-import MainDashboard from '../src/components/Dashboard/mainDashboard'
+import MainDashboard from '../src/components/Dashboard/mainDashboard';
+import Scanner from '../src/components/AR Scanner/scanner'
 
 class App extends React.Component{
     render(){
@@ -29,6 +30,11 @@ class App extends React.Component{
                     exact
                     path="/template" 
                     render={props => <Template {...this.props}/>}
+                />
+                <Route 
+                    exact
+                    path="/scanner" 
+                    render={props => <Scanner {...this.props}/>}
                 />
             </Switch>
             // <Router history={browserHistory}>
